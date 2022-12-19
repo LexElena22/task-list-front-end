@@ -38,13 +38,31 @@ const App = () => {
     setTasklist(newTaskList);
   };
 
+  const deleteTask = (taskId) => {
+    const newTaskList = [];
+    for (const task of taskList) {
+      if (task.id !== taskId) {
+        newTaskList.push(task);
+      }
+    }
+    setTasklist(newTaskList);
+  };
+
   return (
     <div className="App">
       <header className="App-header">
         <h1>Ada&apos;s Task List</h1>
       </header>
       <main>
-        <div>{<TaskList tasks={taskList} updateTask={updateTask} />}</div>
+        <div>
+          {
+            <TaskList
+              tasks={taskList}
+              updateTask={updateTask}
+              deleteTask={deleteTask}
+            />
+          }
+        </div>
       </main>
     </div>
   );
