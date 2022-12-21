@@ -4,24 +4,17 @@ import PropTypes from 'prop-types';
 import './Task.css';
 
 const Task = ({ id, title, isComplete, updateTask, deleteTask }) => {
-  // const [complete, setComplete] = useState(isComplete);
-  let buttonClass = '';
-  const updateTaskStatus = (complete) => {
-    if (complete) {
-      // complete!== complete;
-      console.log('print inside update task status');
-
-      updateTask(id, !isComplete);
-      buttonClass = complete ? 'tasks__item__toggle--completed' : '';
-    }
+  let buttonClass = isComplete ? 'tasks__item__toggle--completed' : '';
+  const updateTaskStatus = () => {
+    updateTask(id, !isComplete);
   };
-  buttonClass = isComplete ? 'tasks__item__toggle--completed' : '';
+
   return (
     <li className="tasks__item">
       <button
         className={`tasks__item__toggle ${buttonClass}`}
         onClick={() => {
-          updateTaskStatus(true);
+          updateTaskStatus();
         }}
       >
         {title}

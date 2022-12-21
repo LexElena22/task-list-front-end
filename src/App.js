@@ -31,7 +31,11 @@ const App = () => {
         //console.log(res);
         const tasksAPIResCopy = res.data.map((task) => {
           return {
-            ...task,
+            // ...task,
+            id: task.id,
+            title: task.title,
+            description: task.description,
+            isComplete: task.is_complete,
           };
         });
         setTasklist(tasksAPIResCopy);
@@ -60,6 +64,7 @@ const App = () => {
             const newTask = {
               ...task,
               isComplete: updatedStatus,
+              // isComplete: !task.isComplete
             };
             newTaskList.push(newTask);
           }
