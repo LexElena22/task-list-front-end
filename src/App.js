@@ -25,7 +25,8 @@ const App = () => {
   const [taskList, setTasklist] = useState([]);
 
   const URL = 'http://localhost:5000/tasks';
-  useEffect(() => {
+
+  const fetchAllTasks = () => {
     axios
       .get(URL)
       .then((res) => {
@@ -44,7 +45,8 @@ const App = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  };
+  useEffect(fetchAllTasks, []);
 
   const updateTask = (taskId, updatedStatus) => {
     let status = 'mark_complete';
@@ -95,6 +97,17 @@ const App = () => {
       });
   };
 
+  const addTask = (newTaskInfo) => {
+    axios
+      .post(URL, newTaskInfo)
+      .then((response) => {
+        fetchAllTasks();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <div className="App">
       <header className="App-header">
@@ -107,7 +120,7 @@ const App = () => {
             updateTask={updateTask}
             deleteTask={deleteTask}
           />
-          <NewTaskForm></NewTaskForm>
+          <NewTaskForm addTaskCallbackFunc={addTask}></NewTaskForm>
         </div>
       </main>
     </div>
