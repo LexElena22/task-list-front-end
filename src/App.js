@@ -46,6 +46,7 @@ const App = () => {
         console.log(err);
       });
   };
+
   useEffect(fetchAllTasks, []);
 
   const updateTask = (taskId, updatedStatus) => {
@@ -101,15 +102,16 @@ const App = () => {
     axios
       .post(URL, newTaskInfo)
       .then((response) => {
-        fetchAllTasks();
-        // const newTasks = [...taskList];
-        // console.log('id:', response.data);
-        // const newTaskJSON = {
-        //   ...newTaskInfo,
-        //   id: [response.task.id],
-        // };
-        // newTasks.push(newTaskJSON);
-        // setTasklist(newTasks);
+        //fetchAllTasks();
+        const newTasks = [...taskList];
+        const newTaskJSON = {
+          ...newTaskInfo,
+          id: response.data.task.id,
+          isComplete: response.data.task.is_complete,
+        };
+        console.log(newTaskJSON);
+        newTasks.push(newTaskJSON);
+        setTasklist(newTasks);
       })
       .catch((error) => {
         console.log(error);
