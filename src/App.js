@@ -102,6 +102,14 @@ const App = () => {
       .post(URL, newTaskInfo)
       .then((response) => {
         fetchAllTasks();
+        // const newTasks = [...taskList];
+        // console.log('id:', response.data);
+        // const newTaskJSON = {
+        //   ...newTaskInfo,
+        //   id: [response.task.id],
+        // };
+        // newTasks.push(newTaskJSON);
+        // setTasklist(newTasks);
       })
       .catch((error) => {
         console.log(error);
